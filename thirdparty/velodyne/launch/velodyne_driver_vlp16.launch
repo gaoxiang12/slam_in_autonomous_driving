@@ -1,0 +1,40 @@
+<launch>
+  <param name="perception_lidar_x_offset_top_center" type="double" value="0.333"/>
+  <param name="perception_lidar_y_offset_top_center" type="double" value="0.0"/>
+  <param name="perception_lidar_z_offset_top_center" type="double" value="1.18"/>
+  <param name="perception_lidar_roll_top_center" type="double" value="0.0"/>
+  <param name="perception_lidar_pitch_top_center" type="double" value="0.0"/>
+  <param name="perception_lidar_yaw_top_center" type="double" value="90.0"/>
+  <param name="car_left" type="double" value="0.4"/>
+  <param name="car_right" type="double" value="-0.4"/>
+  <param name="car_front" type="double" value="1.3"/>
+  <param name="car_back" type="double" value="-0.5"/>
+  <param name="car_top" type="double" value="2.0"/>
+  <param name="car_bottom" type="double" value="-2.0"/>
+
+  <node pkg="velodyne" type="cloud_pool_vlp16" name="cloud_pool_vlp16" output="screen">
+  </node>
+
+
+  <node pkg="velodyne" type="velodyne_driver" name="VLP16_driver_1" output="screen">
+    <param name="lidar_name" type="string" value="top_center"/>
+    <!-- <param name="input_type" type="string" value="bag"/> -->
+    <param name="input_type" type="string" value="pcap"/>
+    <param name="lidar_type" type="string" value="VLP16"/>
+    <param name="pub_topic" type="string" value="lidar_points_1"/>
+    <param name="enable_pub_packets" type="bool" value="false"/>
+    <param name="pub_packets_topic" type="string" value="velodyne_packets_1"/>
+    <param name="frame_id" type="string" value="velodyne_0" />
+    <param name="enable_coordinate_transformation" type="bool" value="true" />
+    <!-- params for socket -->
+    <param name="device_ip" type="string" value="192.168.1.201"/>
+    <param name="port" type="int" value="3201"/>
+    <!-- params for pcap -->
+    <param name="pcap_file" type="string" value="/home/yangxx/datasets/vlp16_left.pcap"/>
+    <param name="speed" type="double" value="1.0"/>
+    <!-- params for bags -->
+    <param name="packet_topic" type="string" value="velodyne_packets_1"/>
+  </node>
+
+
+</launch>

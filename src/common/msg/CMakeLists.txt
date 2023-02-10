@@ -1,0 +1,2 @@
+add_subdirectory(monitor_msgs)
+add_subdirectory(velodyne_msgs)

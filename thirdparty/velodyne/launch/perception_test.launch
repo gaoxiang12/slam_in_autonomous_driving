@@ -1,0 +1,33 @@
+<launch>
+  <include file="$(find velodyne)/launch/velodyne_driver.launch"/>
+  <!-- ivsensorlidar --> 
+  <!-- use maptool params -->
+  <!-- basemap gicscellsize iabasemaptllon iabasemaptllat iabasemapbrlon iabasemapbrlat routemap -->
+  <node pkg="ivsensorlidar" type="ivsensorlidar" name="ivsensorlidar" output="screen" launch-prefix="xterm -e gdb --args">
+      <param type="double" value="20.0" name="roix_lidarcoordinate_max"/>
+      <param type="double" value="0.0" name="roix_lidarcoordinate_min"/>
+      <param type="double" value="10.0" name="roiy_lidarcoordinate_max"/>
+      <param type="double" value="0.0" name="roiy_lidarcoordinate_min"/>
+      <param type="double" value="0.1" name="cellsize_lidarcoordinate"/>
+      <param type="double" value="1.3" name="car_top"/>
+      <param name="morphology_method" value="1"/>
+      <param name="output_bdebug" value="false"/>
+      <param name="output_bdebug_view" value="false"/>
+      <param name="output_freespace_view" value="false"/>
+      <param name="enable_fs" value="true"/>
+      <param name="enable_mesh" value="true"/>
+      <param name="enable_tinyobject" value="true"/>
+      <param name="y_artificial_leftFS" value="10"/>
+      <param name="y_artificial_rightFS" value="-10"/>
+  </node>
+
+  <param name="localization/pointmap_origin_utmx" value="443969.48"/>
+  <param name="localization/pointmap_origin_utmy" value="4436695.40"/>
+  <param name="localization/workspace_path" value="/home/idriver/codes/AVOSWXB15-Production-map/" />
+  <param name="localization/map_name" value="N4007822E11633892" />
+
+  <param name="vehicle_track_width" value="0.742" type="double"/>
+  <param name="wheel_radius_real_l" value="0.155" type="double"/>
+  <param name="wheel_radius_real_r" value="0.155" type="double"/>
+  <param name="wheel_base" value="0.7" type="double"/>
+</launch>

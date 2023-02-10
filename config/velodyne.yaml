@@ -1,0 +1,48 @@
+common:
+  dataset: "nclt"
+  lid_topic: "points_raw"
+  imu_topic: "imu_raw"
+  time_sync_en: false         # ONLY turn on when external time synchronization is really not possible
+
+preprocess:
+  lidar_type: 2                # 1 for Livox serials LiDAR, 2 for Velodyne LiDAR, 3 for ouster LiDAR,
+  scan_line: 32
+  blind: 4
+  time_scale: 1e-3             # 兼容不同数据集的时间单位，仅对Velodyne LiDAR(lidar_type=2)生效
+
+mapping:
+  acc_cov: 0.1
+  gyr_cov: 0.1
+  b_acc_cov: 0.0001
+  b_gyr_cov: 0.0001
+  fov_degree: 180
+  det_range: 100.0
+  extrinsic_est_en: true      # true: enable the online estimation of IMU-LiDAR extrinsic
+  extrinsic_T: [ 0, 0, 0.28 ]
+  extrinsic_R: [ 1, 0, 0,
+                 0, 1, 0,
+                 0, 0, 1 ]
+
+publish:
+  path_publish_en: false
+  scan_publish_en: true       # false: close all the point cloud output
+  scan_effect_pub_en: true    # true: publish the pointscloud of effect point
+  dense_publish_en: false       # false: low down the points number in a global-frame point clouds scan.
+  scan_bodyframe_pub_en: true  # true: output the point cloud scans in IMU-body-frame
+
+path_save_en: true                 # 保存轨迹，用于精度计算和比较
+
+pcd_save:
+  pcd_save_en: false
+  interval: -1                 # how many LiDAR frames saved in each pcd file;
+  # -1 : all frames will be saved in ONE pcd file, may lead to memory crash when having too many frames.
+
+IMU:
+  NoiseGyro: 1e-2   # 3 # 2.44e-4 #1e-3 # rad/s^0.5
+  NoiseAcc: 1e-1    #2 # 1.47e-3 #1e-2 # m/s^1.5
+  GyroWalk: 1e-6    # rad/s^1.5
+  AccWalk: 1e-4     # m/s^2.5
+  Frequency: 200.0
+
+point_filter_num: 7
+max_iteration: 4
