@@ -9,10 +9,7 @@
 #include "common/io_utils.h"
 #include "common/timer/timer.h"
 
-DEFINE_string(bag_path,
-              "./dataset/sad/wxb/北京天坛公园/北京天坛公园/ConvertData/"
-              "dD925040541524227_ENFORCE_20210925012248_V.bag",
-              "path to wxb bag");
+DEFINE_string(bag_path, "./dataset/sad/wxb/test1.bag", "path to wxb bag");
 DEFINE_string(topic, "/velodyne_packets_1", "topic of lidar packets");
 DEFINE_bool(display_map, true, "display map?");
 
