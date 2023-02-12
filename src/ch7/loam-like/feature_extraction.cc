@@ -21,7 +21,7 @@ void FeatureExtraction::Extract(FullCloudPtr pc_in, CloudPtr pc_out_edge, CloudP
         p.z = pt.z;
         p.intensity = pt.intensity;
 
-        scans_in_each_line[pt.ring]->emplace_back(p);
+        scans_in_each_line[pt.ring]->points.emplace_back(p);
     }
 
     // 处理曲率
