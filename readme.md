@@ -67,6 +67,37 @@
 - 在编译本书代码之前，请编译安装本书thirdparty/下的三方库（如果您机器上没有安装的话）。
 - 之后，使用通常的cmake, make 方式就可以编译本书所有内容了。
 
+### 适配Ubuntu18.04
+
+为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB
+
+**安装gcc-9**
+```bash
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo update-alternatives --remove-all gcc
+sudo update-alternatives --remove-all g++
+
+#命令最后的1和10是优先级，如果使用auto选择模式，系统将默认使用优先级高的
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 10
+
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 10
+```
+
+**检查版本**
+```bash
+g++ -v
+```
+
+**编译程序**
+```bash
+mkdir build
+cd build
+cmake .. -DBUILD_WITH_UBUNTU1804=ON
+make -j8
+```
+
 ## TODO项
 
 - 将UI里的不必要信息去除

@@ -70,14 +70,63 @@ include_directories(${yaml-cpp_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR}/thirdparty/)
 include_directories(${PROJECT_SOURCE_DIR}/thirdparty/velodyne/include)
 
-set(third_party_libs
-        ${catkin_LIBRARIES}
-        ${g2o_libs}
-        ${OpenCV_LIBS}
-        ${PCL_LIBRARIES}
-        ${Pangolin_LIBRARIES}
-        glog gflags
-        ${yaml-cpp_LIBRARIES}
-        yaml-cpp
-        tbb
-        )
+if(BUILD_WITH_UBUNTU1804)
+    function(extract_file filename extract_dir)
+        message(STATUS "Extract ${filename} to ${extract_dir} ...")
+        set(temp_dir ${extract_dir})
+        if(EXISTS ${temp_dir})
+            file(REMOVE_RECURSE ${temp_dir})
+        endif()
+        file(MAKE_DIRECTORY ${temp_dir})
+        execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xvzf ${filename}
+                WORKING_DIRECTORY ${temp_dir})
+    endfunction()
+
+    set(TBB_ROOT_DIR ${PROJECT_SOURCE_DIR}/thirdparty/tbb/oneTBB-2019_U8/oneTBB-2019_U8)
+    set(TBB_BUILD_DIR "tbb_build_dir=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}")
+    set(TBB_BUILD_PREFIX "tbb_build_prefix=tbb")
+
+    extract_file(${PROJECT_SOURCE_DIR}/thirdparty/tbb/2019_U8.tar.gz ${PROJECT_SOURCE_DIR}/thirdparty/tbb/oneTBB-2019_U8)
+
+    include(${TBB_ROOT_DIR}/cmake/TBBBuild.cmake)
+
+    #message(STATUS "======TBB_BUILD_DIR = ${TBB_BUILD_DIR}")
+    #message(STATUS "======TBB_BUILD_PREFIX = ${TBB_BUILD_PREFIX}")
+
+    tbb_build(TBB_ROOT ${TBB_ROOT_DIR}
+            compiler=gcc-9
+            stdver=c++17
+            ${TBB_BUILD_DIR}
+            ${TBB_BUILD_PREFIX}
+            CONFIG_DIR
+            TBB_DIR)
+
+    find_package(TBB REQUIRED)
+
+    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/tbb/oneTBB-2019_U8/oneTBB-2019_U8/include)
+    link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/tbb_release)
+
+    set(third_party_libs
+            ${catkin_LIBRARIES}
+            ${g2o_libs}
+            ${OpenCV_LIBS}
+            ${PCL_LIBRARIES}
+            ${Pangolin_LIBRARIES}
+            glog gflags
+            ${yaml-cpp_LIBRARIES}
+            yaml-cpp
+            TBB::tbb
+            )
+else()
+    set(third_party_libs
+            ${catkin_LIBRARIES}
+            ${g2o_libs}
+            ${OpenCV_LIBS}
+            ${PCL_LIBRARIES}
+            ${Pangolin_LIBRARIES}
+            glog gflags
+            ${yaml-cpp_LIBRARIES}
+            yaml-cpp
+            tbb
+            )
+endif ()
