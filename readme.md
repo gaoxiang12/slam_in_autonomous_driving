@@ -64,8 +64,52 @@
 ## 编译
 
 - 本书推荐的编译环境是Ubuntu 20.04。更老的Ubuntu版本需要适配gcc编译器，主要是C++17标准。更新的Ubuntu则需要您自己安装对应的ROS版本。
-- 在编译本书代码之前，请编译安装本书thirdparty/下的三方库（如果您机器上没有安装的话）。
+- 在编译本书代码之前，请编译安装本书thirdparty/下的```g2o```以及以下三方库（如果您机器上没有安装的话）
+   - ROS Noetic (http://wiki.ros.org/noetic/Installation/Ubuntu)
+   - pcl-ros (如果没有选择安装 ```ros-noetic-desktop-full```): ```sudo apt install ros-noetic-pcl-ros```
+   - velodyne-msgs (如果没有选择安装```ros-noetic-desktop-full```): ```sudo apt install ros-noetic-velodyne-msgs```
+   - opencv: ```sudo apt install libopencv-dev```
+   - glog: ```sudo apt install libgoogle-glog-dev```
+   - eigen3: ```sudo apt install libeigen3-dev```
+   - suitesparse: ```sudo apt install libsuitesparse-dev```
+   - pcl: ```sudo apt install libpcl-dev```
+   - yaml-cpp: ```sudo apt install libyaml-cpp-dev```
+   - tbb: ```sudo apt install libbtbb-dev```
+   - gmock: ```sudo apt install libgmock-dev```
+   - 以下命令可以一次安装上面几个库: ```sudo apt install -y libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev```
+   - Pangolin: https://github.com/stevenlovegrove/Pangolin
 - 之后，使用通常的cmake, make 方式就可以编译本书所有内容了。
+
+### 适配Ubuntu18.04
+
+为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB
+
+**安装gcc-9**
+```bash
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo update-alternatives --remove-all gcc
+sudo update-alternatives --remove-all g++
+
+#命令最后的1和10是优先级，如果使用auto选择模式，系统将默认使用优先级高的
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 10
+
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 10
+```
+
+**检查版本**
+```bash
+g++ -v
+```
+
+**编译程序**
+```bash
+mkdir build
+cd build
+cmake .. -DBUILD_WITH_UBUNTU1804=ON
+make -j8
+```
 
 ## TODO项
 
