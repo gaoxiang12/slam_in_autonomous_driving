@@ -9,7 +9,7 @@
 #include "common/io_utils.h"
 #include "tools/ui/pangolin_window.h"
 
-DEFINE_string(imu_txt_path, "./data/txt/北京工业大学.txt", "数据文件路径");
+DEFINE_string(imu_txt_path, "./data/txt/10.txt", "数据文件路径");
 DEFINE_bool(with_ui, true, "是否显示图形界面");
 
 /// 本程序演示如何对IMU进行直接积分
