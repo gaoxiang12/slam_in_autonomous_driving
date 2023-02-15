@@ -48,6 +48,7 @@
 
 - 数据集下载链接：
 - 百度云链接: https://pan.baidu.com/s/1ELOcF1UTKdfiKBAaXnE8sQ?pwd=feky 提取码: feky
+- OneDrive链接：https://1drv.ms/u/s!AgNFVSzSYXMahcEZejoUwCaHRcactQ?e=YsOYy2 
 
 - 包含以下数据集。总量较大(270GB)，请视自己硬盘容量下载。
     - UrbanLoco (ULHK，3D激光，道路场景)
