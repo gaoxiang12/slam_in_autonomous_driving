@@ -5,8 +5,8 @@ target_link_libraries(point_cloud_load_and_vis
         gflags
         )
 
-add_executable(pcd_to_brid_eye pcd_to_brid_eye.cc)
-target_link_libraries(pcd_to_brid_eye
+add_executable(pcd_to_bird_eye pcd_to_bird_eye.cc)
+target_link_libraries(pcd_to_bird_eye
         ${PCL_LIBRARIES}
         ${GLOG_LIBRARIES}
         ${OpenCV_LIBS}
