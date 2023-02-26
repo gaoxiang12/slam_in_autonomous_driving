@@ -178,7 +178,7 @@ bool KdTree::FindSplitAxisAndThresh(const IndexVec &point_idx, int &axis, float 
     // 计算三个轴上的散布情况，我们使用math_utils.h里的函数
     Vec3f var;
     Vec3f mean;
-    math::ComputeMeanAndCovDiag(point_idx, mean, var, [this](const int &idx) { return cloud_[idx]; });
+    math::ComputeMeanAndCovDiag(point_idx, mean, var, [this](int idx) { return cloud_[idx]; });
     int max_i, max_j;
     var.maxCoeff(&max_i, &max_j);
     axis = max_i;
