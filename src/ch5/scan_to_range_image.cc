@@ -32,7 +32,7 @@ void GenerateRangeImage(PointCloudType::Ptr cloud) {
     for (const auto& pt : cloud->points) {
         double azimuth = atan2(pt.y, pt.x) * 180 / M_PI;
         double range = sqrt(pt.x * pt.x + pt.y * pt.y);
-        double elevation = atan2((pt.z - FLAGS_lidar_height), range) * 180 / M_PI;
+        double elevation = asin((pt.z - FLAGS_lidar_height) / range) * 180 / M_PI;
 
         // keep in 0~360
         if (azimuth < 0) {
