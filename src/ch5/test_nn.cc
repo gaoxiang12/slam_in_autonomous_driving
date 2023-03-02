@@ -18,6 +18,7 @@
 
 DEFINE_string(first_scan_path, "./data/ch5/first.pcd", "第一个点云路径");
 DEFINE_string(second_scan_path, "./data/ch5/second.pcd", "第二个点云路径");
+DEFINE_double(ANN_alpha, 1.0, "AAN的比例因子");
 
 TEST(CH5_TEST, BFNN) {
     sad::CloudPtr first(new sad::PointCloudType), second(new sad::PointCloudType);
@@ -222,7 +223,7 @@ TEST(CH5_TEST, KDTREE_KNN) {
     sad::KdTree kdtree;
     sad::evaluate_and_call([&first, &kdtree]() { kdtree.BuildTree(first); }, "Kd Tree build", 1);
 
-    kdtree.SetEnableANN(true, 0.1);
+    kdtree.SetEnableANN(true, FLAGS_ANN_alpha);
 
     LOG(INFO) << "Kd tree leaves: " << kdtree.size() << ", points: " << first->size();
 
@@ -316,7 +317,7 @@ TEST(CH5_TEST, OCTREE_KNN) {
     sad::OctoTree octree;
     sad::evaluate_and_call([&first, &octree]() { octree.BuildTree(first); }, "Octo Tree build", 1);
 
-    octree.SetApproximate(true, 0.2);
+    octree.SetApproximate(true, FLAGS_ANN_alpha);
     LOG(INFO) << "Octo tree leaves: " << octree.size() << ", points: " << first->size();
 
     /// 测试KNN
