@@ -94,7 +94,7 @@ void OctoTree::ExpandNode(OctoTreeNode *node, const IndexVec &parent_idx, std::v
     node->children[7]->box_ = {c_x, b.max_[0], c_y, b.max_[1], c_z, b.max_[2]};
 
     // 把点云归到子节点中
-    for (const auto &idx : parent_idx) {
+    for (int idx : parent_idx) {
         const auto pt = cloud_[idx];
         for (int i = 0; i < 8; ++i) {
             if (node->children[i]->box_.Inside(pt)) {
@@ -107,7 +107,7 @@ void OctoTree::ExpandNode(OctoTreeNode *node, const IndexVec &parent_idx, std::v
 
 Box3D OctoTree::ComputeBoundingBox() {
     float min_values[3] = {std::numeric_limits<float>::max()};
-    float max_values[3] = {std::numeric_limits<float>::min()};
+    float max_values[3] = {-std::numeric_limits<float>::max()};
 
     for (const auto &p : cloud_) {
         for (int i = 0; i < 3; ++i) {
@@ -116,7 +116,7 @@ Box3D OctoTree::ComputeBoundingBox() {
         }
     }
 
-    return {min_values[0], max_values[1], min_values[1], max_values[1], min_values[2], max_values[2]};
+    return {min_values[0], max_values[0], min_values[1], max_values[1], min_values[2], max_values[2]};
 }
 
 bool OctoTree::GetClosestPoint(const PointType &pt, std::vector<int> &closest_idx, int k) const {

@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
               /// 减掉一个原点
               ui->UpdateNavState(
                   sad::NavStated(gnss_out.unix_time_, gnss_out.utm_pose_.so3(),
-                                 gnss_out.utm_pose_.translation() - Vec3d(455343.291, 4413640.01, 37.1386986)));
+                                 gnss_out.utm_pose_.translation()));
               usleep(1e3);
           }
       }).Go();

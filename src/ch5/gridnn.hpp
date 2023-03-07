@@ -153,11 +153,16 @@ bool GridNN<dim>::GetClosestPoint(const PointType& pt, PointType& closest_pt, si
 
     // brute force nn in cloud_[idx]
     CloudPtr nearby_cloud(new PointCloudType);
+    std::vector<size_t> nearby_idx;
     for (auto& idx : idx_to_check) {
         nearby_cloud->points.template emplace_back(cloud_->points[idx]);
+        nearby_idx.emplace_back(idx);
     }
-    idx = bfnn_point(nearby_cloud, ToVec3f(pt));
+
+    size_t closest_point_idx = bfnn_point(nearby_cloud, ToVec3f(pt));
+    idx = nearby_idx.at(closest_point_idx);
     closest_pt = cloud_->points[idx];
+
     return true;
 }
 
