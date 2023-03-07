@@ -1,5 +1,5 @@
-#ifndef FUSION_UI_PANGOLIN_WINDOW_H
-#define FUSION_UI_PANGOLIN_WINDOW_H
+#ifndef SAD_UI_PANGOLIN_WINDOW_H
+#define SAD_UI_PANGOLIN_WINDOW_H
 
 #include "common/eigen_types.h"
 #include "common/gnss.h"

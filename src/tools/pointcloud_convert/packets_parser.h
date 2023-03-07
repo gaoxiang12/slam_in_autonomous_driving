@@ -1,9 +1,4 @@
-//
-// Created by wangqi on 19-7-19.
-//
-
-#ifndef MAPPING_PACKETS_PARSER_H
-#define MAPPING_PACKETS_PARSER_H
+#pragma once
 
 #include <angles/angles.h>
 #include <pcl_ros/point_cloud.h>
@@ -109,5 +104,3 @@ class PacketsParser {
 };
 
 }  // namespace sad::tools
-
-#endif  // MAPPING_PACKETS_PARSER_H

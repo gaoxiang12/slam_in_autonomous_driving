@@ -7,9 +7,7 @@
 
 namespace sad::tools {
 
-/// 通用的Lidar配置参数，因为最初用的velodyne所以一直用这个名
-/// 别问我为啥
-/// 可以从yaml里读取参数，最原始的参数应该在config或者launch里
+/// velodyne的配置参数
 struct VelodyneConfig {
     int type = 16;
     double xoffset = 0.333;

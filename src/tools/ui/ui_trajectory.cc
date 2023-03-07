@@ -15,7 +15,7 @@ void UiTrajectory::AddPt(const SE3& pose) {
 }
 
 void UiTrajectory::Render() {
-    if (vbo_.IsValid() == false) {
+    if (!vbo_.IsValid()) {
         return;
     }
 
