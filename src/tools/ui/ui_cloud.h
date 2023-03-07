@@ -2,13 +2,14 @@
 // Created by xiang on 22-9-7.
 //
 
-#ifndef TFUSION_UI_CLOUD_H
-#define TFUSION_UI_CLOUD_H
+#ifndef SAD_UI_CLOUD_H
+#define SAD_UI_CLOUD_H
 
 #include "common/eigen_types.h"
 #include "common/point_types.h"
 
 #include <pangolin/gl/glvbo.h>
+
 namespace sad::ui {
 
 /// 在UI中使用的点云
@@ -62,4 +63,4 @@ class UiCloud {
 };
 
 }  // namespace sad::ui
-#endif  // TFUSION_UI_CLOUD_H
+#endif

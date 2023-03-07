@@ -8,7 +8,6 @@
 #include "tools/ui/pangolin_window.h"
 #include "tools/ui/ui_car.h"
 #include "tools/ui/ui_cloud.h"
-#include "tools/ui/ui_image.h"
 #include "tools/ui/ui_trajectory.h"
 
 #include <pcl/filters/voxel_grid.h>
@@ -52,8 +51,6 @@ class PangolinWindowImpl {
     std::mutex mtx_map_cloud_;
     std::mutex mtx_current_scan_;
     std::mutex mtx_nav_state_;
-    std::mutex mtx_lidarloc_pose_;
-    std::mutex mtx_pgo_pose_;
     std::mutex mtx_gps_pose_;
 
     std::atomic<bool> exit_flag_;
@@ -93,21 +90,15 @@ class PangolinWindowImpl {
     void CreateDisplayLayout();
 
     void DrawAll();  // 作图：画定位窗口
-    void SwitchBetweenPgoAndLoc();
 
     /// 渲染点云，调用各种Update函数
     void RenderClouds();
     bool UpdateGps();
     bool UpdateGlobalMap();
     bool UpdateState();
-    // bool UpdateLidarLoc();
-    // bool UpdatePgoLoc();
     bool UpdateCurrentScan();
 
-    void RenderScoreImage();
-    void RenderPgoImage();
-    void RenderGlobalPoseStatusAndLabels();
-    void RenderPlot();
+    void RenderLabels();
 
    private:
     /// 窗口layout相关
@@ -124,25 +115,10 @@ class PangolinWindowImpl {
     const std::string dis_plot_name_ = "Plot";
     const std::string dis_imgs_name = "Images";
 
-    bool show_trajectory_ = true;
-    bool img_y_up_ = true;       // 切换图像中Y轴的朝向。opengl: y朝上，opencv中：y朝下。
     bool following_loc_ = true;  // 相机是否追踪定位结果
-    bool show_dr_traj_ = false;  // 是否在主窗口显示lio的轨迹
-    bool show_gps_traj_ = true;  // 是否在主窗口显示gps的轨迹
-    bool reset_dr_traj_ = true;  // reset之后置为false, 初值设为true    为true时 使用PGO的pose做起点，使用dr进行递推
 
     // text
-    pangolin::GlText gltext_gnss_;
-    pangolin::GlText gltext_lidar_;
-    pangolin::GlText gltext_lidar_gnss_;
-    pangolin::GlText gltext_other_;
     pangolin::GlText gltext_label_global_;
-    pangolin::GlText gltext_label_matchloc_;  // 激光与xcm匹配定位 或者 视觉与HD匹配定位
-    pangolin::GlText gltext_label_pgoloc_;
-    pangolin::GlText gltext_label_dr_loc_;
-    pangolin::GlText gltext_label_gps_;
-    pangolin::GlText gltext_bag_name_;
-    pangolin::GlText gltext_sensor_timeout_;
 
     // camera
     pangolin::OpenGlRenderState s_cam_main_;
@@ -154,8 +130,6 @@ class PangolinWindowImpl {
     std::deque<std::shared_ptr<ui::UiCloud>> scans_;                           // current scan 保留的队列
 
     /// ui绘制中使用的一些中间变量
-    // PgoResult pgo_result_ui_;             // pgo融合定位结果
-    // LocResult lidarloc_result_ui_;        // 激光雷达定位结果
     SE3 T_map_odom_for_lio_traj_ui_;      // 用于显示lio的轨迹
     SE3 T_map_baselink_for_lio_traj_ui_;  // 用于显示lio的轨迹
 
@@ -164,34 +138,15 @@ class PangolinWindowImpl {
     std::shared_ptr<ui::UiTrajectory> traj_gps_ui_ = nullptr;
 
     // 滤波器状态相关 Data logger object
-    pangolin::DataLog log_pos_;           // odom frame
-    pangolin::DataLog log_rpy_;           // odom frame
     pangolin::DataLog log_vel_;           // odom frame下的速度
     pangolin::DataLog log_vel_baselink_;  // baselink frame下的速度
     pangolin::DataLog log_bias_acc_;      //
     pangolin::DataLog log_bias_gyr_;      //
-    pangolin::DataLog log_grav_;          // odom frame
-    pangolin::DataLog log_confidence_;    // 雷达/视觉定位的置信度
-    pangolin::DataLog log_yaw_;           // 航向角
 
-    std::unique_ptr<pangolin::Plotter> plotter_pos_ = nullptr;
-    std::unique_ptr<pangolin::Plotter> plotter_rpy_ = nullptr;
     std::unique_ptr<pangolin::Plotter> plotter_vel_ = nullptr;
     std::unique_ptr<pangolin::Plotter> plotter_vel_baselink_ = nullptr;
     std::unique_ptr<pangolin::Plotter> plotter_bias_acc_ = nullptr;
     std::unique_ptr<pangolin::Plotter> plotter_bias_gyr_ = nullptr;
-    std::unique_ptr<pangolin::Plotter> plotter_grav_ = nullptr;
-    std::unique_ptr<pangolin::Plotter> plotter_confidence_ = nullptr;
-    std::unique_ptr<pangolin::Plotter> plotter_yaw_ = nullptr;
-
-    //////////////////////////////// 以上和render相关 ///////////////////////////
-
-    /// pcl点中的颜色：白色
-    static constexpr uint32_t color_white_ = 255 << 24 | 255 << 16 | 255 << 8 | 255;
-    /// 合成pcl点中的颜色
-    static inline uint32_t ComposeColor(uint32_t b, uint32_t g, uint32_t r, uint32_t a = 255) {
-        return (a << 24 | r << 16 | g << 8 | b);
-    }
 };
 
 }  // namespace sad::ui

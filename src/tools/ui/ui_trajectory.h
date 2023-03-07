@@ -2,8 +2,8 @@
 // Created by xiang on 22-9-7.
 //
 
-#ifndef TFUSION_UI_TRAJECTORY_H
-#define TFUSION_UI_TRAJECTORY_H
+#ifndef SAD_UI_TRAJECTORY_H
+#define SAD_UI_TRAJECTORY_H
 
 #include "common/eigen_types.h"
 
@@ -29,11 +29,10 @@ class UiTrajectory {
     }
 
    private:
-    int max_size_ = 1e6;  // 记录的最大点数
-
-    std::vector<Vec3f> pos_;  // 轨迹记录数据
-    Vec3f color_;             // 轨迹颜色显示
-    pangolin::GlBuffer vbo_;  // 显存顶点信息
+    int max_size_ = 1e6;           // 记录的最大点数
+    std::vector<Vec3f> pos_;       // 轨迹记录数据
+    Vec3f color_ = Vec3f::Zero();  // 轨迹颜色显示
+    pangolin::GlBuffer vbo_;       // 显存顶点信息
 };
 
 }  // namespace sad::ui
