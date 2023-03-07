@@ -1,9 +1,4 @@
-//
-// Created by wangqi on 19-7-19.
-//
-
 #include "tools/pointcloud_convert/packets_parser.h"
-
 #include <glog/logging.h>
 
 namespace sad::tools {

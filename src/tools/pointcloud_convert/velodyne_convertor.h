@@ -1,9 +1,4 @@
-//
-// Created by idriver on 19-7-19.
-//
-
-#ifndef MAPPING_PC_CONVERTOR_H
-#define MAPPING_PC_CONVERTOR_H
+#pragma once
 
 #include "common/lidar_utils.h"
 #include "common/point_types.h"
@@ -18,8 +13,6 @@ class VelodyneConvertor {
    public:
     explicit VelodyneConvertor(const VelodyneConfig &config = VelodyneConfig());
 
-    ~VelodyneConvertor() {}
-
     /**
      * 将packets msgs转换为FullCloud
      * 同时会根据velodyne_config_中的配置来将激光点云转到IMU系
@@ -28,8 +21,6 @@ class VelodyneConvertor {
      */
     void ProcessScan(const PacketsMsgPtr &packets_msg, FullCloudPtr &out_cloud);
 
-    VelodyneConfig GetConfig() const;
-
    private:
     VelodyneConfig velodyne_config_;
     std::shared_ptr<PacketsParser> packets_parser_ = nullptr;
@@ -37,5 +28,3 @@ class VelodyneConvertor {
 };
 
 }  // namespace sad::tools
-
-#endif  // MAPPING_PC_CONVERTOR_H

@@ -18,8 +18,6 @@ VelodyneConvertor::VelodyneConvertor(const VelodyneConfig &config) : velodyne_co
     converted_cloud_.reset(new FullPointCloudType());
 }
 
-VelodyneConfig VelodyneConvertor::GetConfig() const { return velodyne_config_; }
-
 void VelodyneConvertor::ProcessScan(const PacketsMsgPtr &packets_msg, FullCloudPtr &out_cloud) {
     packets_parser_->PaddingPointCloud(packets_msg, out_cloud);
 }
