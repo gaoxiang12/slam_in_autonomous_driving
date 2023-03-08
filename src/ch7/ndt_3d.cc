@@ -105,8 +105,8 @@ bool Ndt3d::AlignNdt(SE3& init_pose) {
             Vec3i key = (qs * options_.inv_voxel_size_).cast<int>();
 
             for (int i = 0; i < nearby_grids_.size(); ++i) {
-                key += nearby_grids_[i];
-                auto it = grids_.find(key);
+                auto key_off = key = nearby_grids_[i];
+                auto it = grids_.find(key_off);
                 int real_idx = idx * num_residual_per_point + i;
                 if (it != grids_.end()) {
                     auto& v = it->second;  // voxel
