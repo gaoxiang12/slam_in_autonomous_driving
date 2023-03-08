@@ -71,6 +71,10 @@ void Frontend::Run() {
 
 void Frontend::ExtractKeyFrame(const sad::NavStated& state) {
     if (last_kf_ == nullptr) {
+        if (!lio_->GetCurrentScan()) {
+            // LIO没完成初始化
+            return;
+        }
         // 第一个帧
         auto kf = std::make_shared<Keyframe>(state.timestamp_, kf_id_++, state.GetSE3(), lio_->GetCurrentScan());
         FindGPSPose(kf);

@@ -28,7 +28,11 @@ int main(int argc, char** argv) {
 
     rosbag_io
         .AddAutoPointCloudHandle([&](sensor_msgs::PointCloud2::Ptr cloud) -> bool {
-            sad::common::Timer::Evaluate([&]() { lio.PCLCallBack(cloud); }, "IEKF lio");
+            sad::common::Timer::Evaluate([&]() { lio.PCLCallBack(cloud); }, "Pre-Integration lio");
+            return true;
+        })
+        .AddLivoxHandle([&](const livox_ros_driver::CustomMsg::ConstPtr& msg) -> bool {
+            sad::common::Timer::Evaluate([&]() { lio.LivoxPCLCallBack(msg); }, "Pre-Integration lio");
             return true;
         })
         .AddImuHandle([&](IMUPtr imu) {

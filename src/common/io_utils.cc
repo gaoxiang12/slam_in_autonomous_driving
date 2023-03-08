@@ -101,13 +101,23 @@ RosbagIO &RosbagIO::AddImuHandle(RosbagIO::ImuHandle f) {
             return false;
         }
 
-        IMUPtr imu(new IMU(msg->header.stamp.toSec(),
-                           Vec3d(msg->angular_velocity.x, msg->angular_velocity.y, msg->angular_velocity.z),
-                           Vec3d(msg->linear_acceleration.x, msg->linear_acceleration.y, msg->linear_acceleration.z)));
+        IMUPtr imu;
+        if (dataset_type_ == DatasetType::AVIA) {
+            // Livox内置imu的加计需要乘上重力常数
+            imu =
+                std::make_shared<IMU>(msg->header.stamp.toSec(),
+                                      Vec3d(msg->angular_velocity.x, msg->angular_velocity.y, msg->angular_velocity.z),
+                                      Vec3d(msg->linear_acceleration.x * 9.80665, msg->linear_acceleration.y * 9.80665,
+                                            msg->linear_acceleration.z * 9.80665));
+        } else {
+            imu = std::make_shared<IMU>(
+                msg->header.stamp.toSec(),
+                Vec3d(msg->angular_velocity.x, msg->angular_velocity.y, msg->angular_velocity.z),
+                Vec3d(msg->linear_acceleration.x, msg->linear_acceleration.y, msg->linear_acceleration.z));
+        }
         return f(imu);
     });
 }
-
 
 std::string RosbagIO::GetIMUTopicName() const {
     if (dataset_type_ == DatasetType::ULHK) {

@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
                 LOG(ERROR) << "align failed.";
             }
         },
-        "ICP P2Plane", 1);
+        "ICP P2Line", 1);
 
     /// 第７章的NDT
     sad::evaluate_and_call(
