@@ -31,6 +31,10 @@ int main(int argc, char** argv) {
             sad::common::Timer::Evaluate([&]() { lio.PCLCallBack(cloud); }, "IEKF lio");
             return true;
         })
+        .AddLivoxHandle([&](const livox_ros_driver::CustomMsg::ConstPtr& msg) -> bool {
+            sad::common::Timer::Evaluate([&]() { lio.LivoxPCLCallBack(msg); }, "IEKF lio");
+            return true;
+        })
         .AddImuHandle([&](IMUPtr imu) {
             lio.IMUCallBack(imu);
             return true;

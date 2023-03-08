@@ -37,7 +37,7 @@ void PlaneFittingTest() {
         // 先生成一个随机点，计算第四维，增加噪声，再归一化
         Vec3d p(rng.uniform(0.0, 1.0), rng.uniform(0.0, 1.0), rng.uniform(0.0, 1.0));
         double n4 = -p.dot(true_plane_coeffs.head<3>()) / true_plane_coeffs[3];
-        p = p / (n4 + 1e-18);  // 防止除零
+        p = p / (n4 + std::numeric_limits<double>::min());  // 防止除零
         p += Vec3d(rng.gaussian(FLAGS_noise_sigma), rng.gaussian(FLAGS_noise_sigma), rng.gaussian(FLAGS_noise_sigma));
 
         points.emplace_back(p);

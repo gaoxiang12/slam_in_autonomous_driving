@@ -476,12 +476,6 @@ inline bool PoseInterp(double query_time, C&& data, FT&& take_time_func, FP&& ta
 
     auto match_iter_n = match_iter;
     match_iter_n++;
-    if (match_iter_n == data.end()) {
-        // 就一个，那就返回他
-        best_match = *match_iter;
-        result = take_pose_func(*match_iter);
-        return true;
-    }
 
     double dt = take_time_func(*match_iter_n) - take_time_func(*match_iter);
     double s = (query_time - take_time_func(*match_iter)) / dt;  // s=0 时为第一帧，s=1时为next

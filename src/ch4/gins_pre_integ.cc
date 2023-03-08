@@ -76,6 +76,9 @@ void GinsPreInteg::AddGnss(const GNSS& gnss) {
         return;
     }
 
+    // 积分到GNSS时刻
+    pre_integ_->Integrate(last_imu_, gnss.unix_time_ - current_time_);
+
     current_time_ = gnss.unix_time_;
     *this_frame_ = pre_integ_->Predict(*last_frame_, options_.gravity_);
 
@@ -206,6 +209,9 @@ void GinsPreInteg::Optimize() {
         edge_odom = new EdgeEncoder3D(v1_vel, vel_world);
         edge_odom->setInformation(options_.odom_info_);
         optimizer.addEdge(edge_odom);
+
+        // 重置odom数据到达标志位，等待最新的odom数据
+        last_odom_set_ = false;
     }
 
     optimizer.setVerbose(options_.verbose_);
