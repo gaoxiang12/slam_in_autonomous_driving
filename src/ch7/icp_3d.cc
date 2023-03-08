@@ -76,7 +76,7 @@ bool Icp3d::AlignP2P(SE3& init_pose) {
                     total_res += errors[idx].dot(errors[idx]);
                     effective_num++;
                     return std::pair<Mat6d, Vec6d>(pre.first + jacobians[idx].transpose() * jacobians[idx],
-                                                   pre.second + -jacobians[idx].transpose() * errors[idx]);
+                                                   pre.second - jacobians[idx].transpose() * errors[idx]);
                 }
             });
 
@@ -187,7 +187,7 @@ bool Icp3d::AlignP2Plane(SE3& init_pose) {
                     total_res += errors[idx] * errors[idx];
                     effective_num++;
                     return std::pair<Mat6d, Vec6d>(pre.first + jacobians[idx].transpose() * jacobians[idx],
-                                                   pre.second + -jacobians[idx].transpose() * errors[idx]);
+                                                   pre.second - jacobians[idx].transpose() * errors[idx]);
                 }
             });
 
@@ -304,7 +304,7 @@ bool Icp3d::AlignP2Line(SE3& init_pose) {
                     total_res += errors[idx].dot(errors[idx]);
                     effective_num++;
                     return std::pair<Mat6d, Vec6d>(pre.first + jacobians[idx].transpose() * jacobians[idx],
-                                                   pre.second + -jacobians[idx].transpose() * errors[idx]);
+                                                   pre.second - jacobians[idx].transpose() * errors[idx]);
                 }
             });
 
