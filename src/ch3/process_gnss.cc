@@ -69,14 +69,14 @@ int main(int argc, char** argv) {
                   origin = gnss_out.utm_pose_.translation();
                   first_gnss_set = true;
               }
+
+              /// 减掉一个原点
               gnss_out.utm_pose_.translation() -= origin;
 
               save_result(fout, gnss_out.unix_time_, gnss_out.utm_pose_);
 
-              /// 减掉一个原点
               ui->UpdateNavState(
-                  sad::NavStated(gnss_out.unix_time_, gnss_out.utm_pose_.so3(),
-                                 gnss_out.utm_pose_.translation()));
+                  sad::NavStated(gnss_out.unix_time_, gnss_out.utm_pose_.so3(), gnss_out.utm_pose_.translation()));
               usleep(1e3);
           }
       }).Go();

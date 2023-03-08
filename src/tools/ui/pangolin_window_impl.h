@@ -124,7 +124,7 @@ class PangolinWindowImpl {
     pangolin::OpenGlRenderState s_cam_main_;
 
     /// cloud rendering
-    ui::UiCar car_{Vec3f(1.0, 1.0, 1.0)};                                      // 白色车
+    ui::UiCar car_{Vec3f(0.2, 0.2, 0.8)};                                      // 白色车
     std::map<Vec2i, std::shared_ptr<ui::UiCloud>, less_vec<2>> cloud_map_ui_;  // 用来渲染的点云地图
     std::shared_ptr<ui::UiCloud> current_scan_ui_;                             // current scan
     std::deque<std::shared_ptr<ui::UiCloud>> scans_;                           // current scan 保留的队列

@@ -2,8 +2,8 @@
 // Created by xiang on 2021/7/19.
 //
 
-#ifndef MAPPING_NAV_STATE_H
-#define MAPPING_NAV_STATE_H
+#ifndef SAD_NAV_STATE_H
+#define SAD_NAV_STATE_H
 
 #include <sophus/so3.hpp>
 #include "common/eigen_types.h"
@@ -24,8 +24,8 @@ struct NavState {
     NavState() = default;
 
     // from time, R, p, v, bg, ba
-    NavState(double time, const SO3& R = SO3(), const Vec3& t = Vec3::Zero(), const Vec3& v = Vec3::Zero(),
-             const Vec3& bg = Vec3::Zero(), const Vec3& ba = Vec3::Zero())
+    explicit NavState(double time, const SO3& R = SO3(), const Vec3& t = Vec3::Zero(), const Vec3& v = Vec3::Zero(),
+                      const Vec3& bg = Vec3::Zero(), const Vec3& ba = Vec3::Zero())
         : timestamp_(time), R_(R), p_(t), v_(v), bg_(bg), ba_(ba) {}
 
     // from pose and vel
@@ -55,4 +55,4 @@ using NavStatef = NavState<float>;
 
 }  // namespace sad
 
-#endif  // MAPPING_NAV_STATE_H
+#endif
