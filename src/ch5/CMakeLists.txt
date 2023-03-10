@@ -26,9 +26,15 @@ add_library(${PROJECT_NAME}.ch5
         kdtree.cc
         octo_tree.cc
         )
-target_link_libraries(${PROJECT_NAME}.ch5
+if (BUILD_WITH_UBUNTU1804)
+  target_link_libraries(${PROJECT_NAME}.ch5
+        TBB::tbb
+        )
+else()
+  target_link_libraries(${PROJECT_NAME}.ch5
         tbb
         )
+endif()
 
 add_executable(linear_fitting linear_fitting.cc)
 target_link_libraries(linear_fitting
@@ -41,6 +47,12 @@ target_link_libraries(linear_fitting
 ADD_EXECUTABLE(test_nn test_nn.cc)
 ADD_TEST(test_nn test_bfnn)
 
-target_link_libraries(test_nn
+if (BUILD_WITH_UBUNTU1804)
+  target_link_libraries(test_nn
+        GTest::gtest pthread glog gflags ${PROJECT_NAME}.ch5 ${PROJECT_NAME}.common ${PCL_LIBRARIES} TBB::tbb
+        )
+else()
+  target_link_libraries(test_nn
         gtest pthread glog gflags ${PROJECT_NAME}.ch5 ${PROJECT_NAME}.common ${PCL_LIBRARIES} tbb
         )
+endif()
