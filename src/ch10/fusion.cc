@@ -243,8 +243,8 @@ bool Fusion::LidarLocalization() {
 }
 
 void Fusion::LoadMap(const SE3& pose) {
-    int gx = int((pose.translation().x() - 50.0) / 100);
-    int gy = int((pose.translation().y() - 50.0) / 100);
+    int gx = floor((pose.translation().x() - 50.0) / 100);
+    int gy = floor((pose.translation().y() - 50.0) / 100);
     Vec2i key(gx, gy);
 
     // 一个区域的周边地图，我们认为9个就够了

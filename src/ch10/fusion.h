@@ -45,9 +45,6 @@ class Fusion {
     void ProcessIMU(IMUPtr imu);
     void ProcessPointCloud(sensor_msgs::PointCloud2::Ptr cloud);
 
-    /// 执行激光定位与滤波器更新
-    void Run();
-
    private:
     /// 读取某个点附近的地图
     void LoadMap(const SE3& pose);

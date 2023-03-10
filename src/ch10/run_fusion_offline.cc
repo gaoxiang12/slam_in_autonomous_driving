@@ -43,4 +43,6 @@ int main(int argc, char** argv) {
         .Go();
 
     LOG(INFO) << "done.";
+    sleep(10);
+    return 0;
 }

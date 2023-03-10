@@ -144,7 +144,6 @@ void PangolinWindowImpl::DrawAll() {
 
     current_scan_ui_->Render();
 
-    glDisable(GL_DEPTH_TEST);
     traj_lidarloc_ui_->Render();
     traj_gps_ui_->Render();
 
@@ -154,7 +153,6 @@ void PangolinWindowImpl::DrawAll() {
 
     // 文字
     RenderLabels();
-    glEnable(GL_DEPTH_TEST);
 }
 
 void PangolinWindowImpl::RenderClouds() {

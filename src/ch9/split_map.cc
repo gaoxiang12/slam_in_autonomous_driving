@@ -52,8 +52,8 @@ int main(int argc, char** argv) {
 
         // add to grid
         for (const auto& pt : kf_cloud_voxeled->points) {
-            int gx = int((pt.x - 50.0) / 100);
-            int gy = int((pt.y - 50.0) / 100);
+            int gx = floor((pt.x - 50.0) / 100);
+            int gy = floor((pt.y - 50.0) / 100);
             Vec2i key(gx, gy);
             auto iter = map_data.find(key);
             if (iter == map_data.end()) {
