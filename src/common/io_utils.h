@@ -68,8 +68,6 @@ class TxtIO {
 /**
  * ROSBAG IO
  * 指定一个包名，添加一些回调函数，就可以顺序遍历这个包
- *
- * TODO DatasetType 应该是运行期指定的。。。编译期指定的话，gflags没法用。。
  */
 class RosbagIO {
    public:

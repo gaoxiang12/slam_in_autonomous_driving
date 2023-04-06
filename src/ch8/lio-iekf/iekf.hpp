@@ -251,7 +251,8 @@ bool IESKF<S>::UpdateUsingCustomObserve(IESKF::CustomObsFunc obs) {
 
     // project P
     Mat18T J = Mat18T::Identity();
-    J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat(dx_.template block<3, 1>(6, 0));
+    Vec3d dtheta = (start_R.inverse() * R_).log();
+    J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat(dtheta);
     cov_ = J * cov_ * J.inverse();
 
     dx_.setZero();
