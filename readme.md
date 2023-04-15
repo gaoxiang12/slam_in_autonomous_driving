@@ -67,21 +67,22 @@
 ## 编译
 
 - 本书推荐的编译环境是Ubuntu 20.04。更老的Ubuntu版本需要适配gcc编译器，主要是C++17标准。更新的Ubuntu则需要您自己安装对应的ROS版本。
-- 在编译本书代码之前，请编译安装本书thirdparty/下的```g2o```以及以下三方库（如果您机器上没有安装的话）
-   - ROS Noetic (http://wiki.ros.org/noetic/Installation/Ubuntu)
-   - pcl-ros (如果没有选择安装 ```ros-noetic-desktop-full```): ```sudo apt install ros-noetic-pcl-ros```
-   - velodyne-msgs (如果没有选择安装```ros-noetic-desktop-full```): ```sudo apt install ros-noetic-velodyne-msgs```
-   - opencv: ```sudo apt install libopencv-dev```
-   - glog: ```sudo apt install libgoogle-glog-dev```
-   - eigen3: ```sudo apt install libeigen3-dev```
-   - suitesparse: ```sudo apt install libsuitesparse-dev```
-   - pcl: ```sudo apt install libpcl-dev```
-   - yaml-cpp: ```sudo apt install libyaml-cpp-dev```
-   - tbb: ```sudo apt install libbtbb-dev```
-   - gmock: ```sudo apt install libgmock-dev```
-   - 以下命令可以一次安装上面几个库: ```sudo apt install -y libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev```
-   - Pangolin: https://github.com/stevenlovegrove/Pangolin
-- 之后，使用通常的cmake, make 方式就可以编译本书所有内容了。
+- 在编译本书代码之前，请先安装以下库（如果您机器上没有安装的话）
+    - ROS Noetic: http://wiki.ros.org/noetic/Installation/Ubuntu
+    - 使用以下指令安装其余的库
+    ```bash
+    sudo apt install -y ros-noetic-pcl-ros ros-noetic-velodyne-msgs libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev
+    ```
+    - Pangolin: https://github.com/stevenlovegrove/Pangolin
+    - 通过cmake, make安装本repo下的`thirdparty/g2o`库
+- 之后，使用通常的cmake, make方式就可以编译本书所有内容了。例如
+```bash
+mkdir build
+cd build
+cmake ..
+make -j8
+```
+- 编译后各章的可执行文件位于`bin`目录下
 
 ### 适配Ubuntu18.04
 
