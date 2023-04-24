@@ -97,7 +97,9 @@ int main(int argc, char** argv) {
 
           /// predict就会更新ESKF，所以此时就可以发送数据
           auto state = eskf.GetNominalState();
-          ui->UpdateNavState(state);
+          if(ui){
+              ui->UpdateNavState(state);
+          }
 
           /// 记录数据以供绘图
           save_result(fout, state);
