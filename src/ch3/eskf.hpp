@@ -307,7 +307,7 @@ bool ESKF<S>::ObserveGps(const GNSS& gnss) {
 template <typename S>
 bool ESKF<S>::ObserveSE3(const SE3& pose, double trans_noise, double ang_noise) {
     /// 既有旋转，也有平移
-    /// 观测状态变量中的p, V，H为6x18，其余为零
+    /// 观测状态变量中的p, R，H为6x18，其余为零
     Eigen::Matrix<S, 6, 18> H = Eigen::Matrix<S, 6, 18>::Zero();
     H.template block<3, 3>(0, 0) = Mat3T::Identity();  // P部分
     H.template block<3, 3>(3, 6) = Mat3T::Identity();  // R部分（3.66)
