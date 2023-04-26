@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
             }
             gnss_convert.utm_pose_.translation() -= origin;
 
-            // 要求RTK heading有效，才能合入EKF
+            // 要求RTK heading有效，才能合入ESKF
             eskf.ObserveGps(gnss_convert);
 
             auto state = eskf.GetNominalState();

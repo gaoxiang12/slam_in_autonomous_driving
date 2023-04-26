@@ -40,7 +40,7 @@ class LoopClosing {
     /// 添加最近的submap，这个submap可能正在构建中
     void AddNewSubmap(std::shared_ptr<Submap> submap);
 
-    /// 添加一个已经建完的submap
+    /// 添加一个已经建完的submap，需要在AddNewSubmap函数之后调用
     void AddFinishedSubmap(std::shared_ptr<Submap> submap);
 
     /// 为新的frame进行回环检测，更新它的pose和submap的pose

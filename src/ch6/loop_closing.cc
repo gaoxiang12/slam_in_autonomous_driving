@@ -92,7 +92,6 @@ void LoopClosing::MatchInHistorySubmaps() {
 
         auto submap = submaps_[can];
         SE2 pose_in_target_submap = submap->GetPose().inverse() * current_frame_->pose_;  // T_S1_C
-        SE2 init_guess = pose_in_target_submap;
 
         if (mr->AlignG2O(pose_in_target_submap)) {
             // set constraints from current submap to target submap

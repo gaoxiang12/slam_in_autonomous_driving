@@ -14,6 +14,7 @@ void DirectNDTLO::AddCloud(CloudPtr scan, SE3& pose) {
     if (local_map_ == nullptr) {
         // 第一个帧，直接加入local map
         local_map_.reset(new PointCloudType);
+        // operator += 用来拼接点云
         *local_map_ += *scan;
         pose = SE3();
         last_kf_pose_ = pose;

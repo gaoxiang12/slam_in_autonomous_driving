@@ -140,8 +140,8 @@ class IESKF {
         gnss_noise_.diagonal() << gp2, gp2, gh2, ga2, ga2, ga2;
     }
 
-    /// 更新名义状态变量，重置error state
-    void UpdateAndReset() {
+    /// 更新名义状态变量
+    void Update() {
         p_ += dx_.template block<3, 1>(0, 0);
         v_ += dx_.template block<3, 1>(3, 0);
         R_ = R_ * SO3::exp(dx_.template block<3, 1>(6, 0));
@@ -239,7 +239,7 @@ bool IESKF<S>::UpdateUsingCustomObserve(IESKF::CustomObsFunc obs) {
         // LOG(INFO) << "iter " << iter << " dx = " << dx_.transpose() << ", dxn: " << dx_.norm();
 
         // dx合入名义变量
-        UpdateAndReset();
+        Update();
 
         if (dx_.norm() < options_.quit_eps_) {
             break;
