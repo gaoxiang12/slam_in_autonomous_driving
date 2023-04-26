@@ -104,7 +104,7 @@ inline size_t hash_vec<2>::operator()(const Eigen::Matrix<int, 2, 1>& v) const {
 
 template <>
 inline size_t hash_vec<3>::operator()(const Eigen::Matrix<int, 3, 1>& v) const {
-    return size_t((v[0] * 73856093) ^ (v[1] * 471943) ^ (v[2] * 83492791) % 10000000);
+    return size_t(((v[0] * 73856093) ^ (v[1] * 471943) ^ (v[2] * 83492791)) % 10000000);
 }
 
 constexpr auto less_vec2i = [](const Vec2i& v1, const Vec2i& v2) {
