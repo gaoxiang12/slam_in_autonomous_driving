@@ -193,7 +193,7 @@ bool KdTree::FindSplitAxisAndThresh(const IndexVec &point_idx, int &axis, float 
         }
     }
 
-    // 边界情况检查：输入的points等于同一个值，上面的判定是<号，所以都进了右侧
+    // 边界情况检查：输入的points等于同一个值，上面的判定是>=号，所以都进了右侧
     // 这种情况不需要继续展开，直接将当前节点设为叶子就行
     if (point_idx.size() > 1 && (left.empty() || right.empty())) {
         return false;
