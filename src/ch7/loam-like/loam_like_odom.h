@@ -48,8 +48,7 @@ class LoamLikeOdom {
 
     /**
      * 往里程计中添加一个点云，内部会分为角点和平面点
-     * @param pcd_edge
-     * @param pcd_surf
+     * @param full_cloud
      */
     void ProcessPointCloud(FullCloudPtr full_cloud);
 

@@ -16,7 +16,7 @@ void IMUPreintegration::Integrate(const IMU &imu, double dt) {
     Vec3d gyr = imu.gyro_ - bg_;  // 陀螺
     Vec3d acc = imu.acce_ - ba_;  // 加计
 
-    // 更新dv, dp, 见(4.7)
+    // 更新dv, dp, 见(4.13), (4.16)
     dp_ = dp_ + dv_ * dt + 0.5f * dR_.matrix() * acc * dt * dt;
     dv_ = dv_ + dR_ * acc * dt;
 
@@ -50,7 +50,7 @@ void IMUPreintegration::Integrate(const IMU &imu, double dt) {
     Vec3d omega = gyr * dt;         // 转动量
     Mat3d rightJ = SO3::jr(omega);  // 右雅可比
     SO3 deltaR = SO3::exp(omega);   // exp后
-    dR_ = dR_ * deltaR;             // (4.7a)
+    dR_ = dR_ * deltaR;             // (4.9)
 
     A.block<3, 3>(0, 0) = deltaR.matrix().transpose();
     B.block<3, 3>(0, 0) = rightJ * dt;

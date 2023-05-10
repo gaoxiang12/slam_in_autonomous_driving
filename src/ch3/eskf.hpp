@@ -176,7 +176,7 @@ class ESKF {
         dx_.setZero();
     }
 
-    /// 对P阵进行投影，参考式(3.59)
+    /// 对P阵进行投影，参考式(3.63)
     void ProjectCov() {
         Mat18T J = Mat18T::Identity();
         J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat(dx_.template block<3, 1>(6, 0));

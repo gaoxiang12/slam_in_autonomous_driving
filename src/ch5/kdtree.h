@@ -116,7 +116,7 @@ class KdTree {
     bool NeedExpand(const Vec3f& pt, KdTreeNode* node, std::priority_queue<NodeAndDistance>& knn_result) const;
 
     int k_ = 5;                                   // knn最近邻数量
-    std::shared_ptr<KdTreeNode> root_ = nullptr;  // 叶子节点
+    std::shared_ptr<KdTreeNode> root_ = nullptr;  // 根节点
     std::vector<Vec3f> cloud_;                    // 输入点云
     std::unordered_map<int, KdTreeNode*> nodes_;  // for bookkeeping
 
