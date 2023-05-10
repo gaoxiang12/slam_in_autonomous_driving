@@ -162,6 +162,8 @@ void LioPreinteg::TryInitIMU() {
         current_nav_state_.v_.setZero();
         current_nav_state_.bg_ = imu_init_.GetInitBg();
         current_nav_state_.ba_ = imu_init_.GetInitBa();
+        current_nav_state_.timestamp_ = measures_.imu_.back()->timestamp_;
+        
         last_nav_state_ = current_nav_state_;
         last_imu_ = measures_.imu_.back();
 
