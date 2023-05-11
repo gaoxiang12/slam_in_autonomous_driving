@@ -7,12 +7,14 @@
 
 #include <pcl/io/pcd_io.h>
 
+#include "common/point_cloud_utils.h"
+
 int main(int argc, char** argv) {
     sad::GenSimuData gen;
     gen.Gen();
 
-    pcl::io::savePCDFileBinaryCompressed("./data/ch7/sim_source.pcd", *gen.GetSource());
-    pcl::io::savePCDFileBinaryCompressed("./data/ch7/sim_target.pcd", *gen.GetTarget());
+    sad::SaveCloudToFile("./data/ch7/sim_source.pcd", *gen.GetSource());
+    sad::SaveCloudToFile("./data/ch7/sim_target.pcd", *gen.GetTarget());
 
     SE3 T_target_source = gen.GetPose().inverse();
     LOG(INFO) << "gt pose: " << T_target_source.translation().transpose() << ", "

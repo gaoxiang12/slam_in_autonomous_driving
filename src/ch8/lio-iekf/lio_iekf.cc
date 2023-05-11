@@ -14,6 +14,8 @@
 
 #include "common/lidar_utils.h"
 #include "common/timer/timer.h"
+#include "common/point_cloud_utils.h"
+
 #include "lio_iekf.h"
 
 namespace sad {
@@ -158,7 +160,7 @@ void LioIEKF::Undistort() {
     SE3 T_end = SE3(imu_state.R_, imu_state.p_);
 
     if (options_.save_motion_undistortion_pcd_) {
-        pcl::io::savePCDFileBinary("./data/ch7/before_undist.pcd", *cloud);
+        sad::SaveCloudToFile("./data/ch7/before_undist.pcd", *cloud);
     }
 
     /// 将所有点转到最后时刻状态上
@@ -181,7 +183,7 @@ void LioIEKF::Undistort() {
     scan_undistort_ = cloud;
 
     if (options_.save_motion_undistortion_pcd_) {
-        pcl::io::savePCDFileBinary("./data/ch7/after_undist.pcd", *cloud);
+        sad::SaveCloudToFile("./data/ch7/after_undist.pcd", *cloud);
     }
 }
 

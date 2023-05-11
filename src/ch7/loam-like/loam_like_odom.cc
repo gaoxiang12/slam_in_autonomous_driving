@@ -6,6 +6,7 @@
 #include "ch7/loam-like/feature_extraction.h"
 #include "common/lidar_utils.h"
 #include "common/math_utils.h"
+#include "common/point_cloud_utils.h"
 
 #include <execution>
 
@@ -277,7 +278,7 @@ SE3 LoamLikeOdom::AlignWithLocalMap(CloudPtr edge, CloudPtr surf) {
 
 void LoamLikeOdom::SaveMap(const std::string& path) {
     if (global_map_ && global_map_->empty() == false) {
-        pcl::io::savePCDFileBinaryCompressed(path, *global_map_);
+        sad::SaveCloudToFile(path, *global_map_);
     }
 }
 

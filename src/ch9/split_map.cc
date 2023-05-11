@@ -12,6 +12,7 @@
 #include "common/eigen_types.h"
 #include "common/point_cloud_utils.h"
 #include "keyframe.h"
+#include "common/point_cloud_utils.h"
 
 DEFINE_string(map_path, "./data/ch9/", "导出数据的目录");
 DEFINE_double(voxel_size, 0.1, "导出地图分辨率");
@@ -77,9 +78,9 @@ int main(int argc, char** argv) {
     for (auto& dp : map_data) {
         fout << dp.first[0] << " " << dp.first[1] << std::endl;
         dp.second->width = dp.second->size();
-        VoxelGrid(dp.second, 0.1);
+        sad::VoxelGrid(dp.second, 0.1);
 
-        pcl::io::savePCDFileBinaryCompressed(
+        sad::SaveCloudToFile(
             "./data/ch9/map_data/" + std::to_string(dp.first[0]) + "_" + std::to_string(dp.first[1]) + ".pcd",
             *dp.second);
     }
