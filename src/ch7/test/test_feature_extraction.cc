@@ -9,6 +9,7 @@
 #include "common/io_utils.h"
 
 #include "common/timer/timer.h"
+#include "common/point_cloud_utils.h"
 
 /// 这里需要vlp16的数据，用wxb的
 DEFINE_string(bag_path, "./dataset/sad/wxb/test1.bag", "path to wxb bag");
@@ -34,8 +35,8 @@ int main(int argc, char** argv) {
                                    "Feature Extraction");
                                LOG(INFO) << "original pts:" << cloud->size() << ", corners: " << pcd_corner->size()
                                          << ", surf: " << pcd_surf->size();
-                               pcl::io::savePCDFileBinary("./data/ch7/corner.pcd", *pcd_corner);
-                               pcl::io::savePCDFileBinary("./data/ch7/surf.pcd", *pcd_surf);
+                               sad::SaveCloudToFile("./data/ch7/corner.pcd", *pcd_corner);
+                               sad::SaveCloudToFile("./data/ch7/surf.pcd", *pcd_surf);
                                return true;
                            })
         .Go();

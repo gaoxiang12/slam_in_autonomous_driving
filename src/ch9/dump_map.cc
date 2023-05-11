@@ -14,6 +14,7 @@ DEFINE_string(dump_to, "./data/ch9/", "导出的目标路径");
 #include <pcl/io/pcd_io.h>
 
 #include "keyframe.h"
+#include "common/point_cloud_utils.h"
 
 /**
  * 将keyframes.txt中的地图和点云合并为一个pcd
@@ -78,7 +79,7 @@ int main(int argc, char** argv) {
     }
 
     if (!global_cloud->empty()) {
-        pcl::io::savePCDFileBinaryCompressed(FLAGS_dump_to + "/map.pcd", *global_cloud);
+        sad::SaveCloudToFile(FLAGS_dump_to + "/map.pcd", *global_cloud);
     }
 
     LOG(INFO) << "done.";

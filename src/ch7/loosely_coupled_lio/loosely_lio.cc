@@ -3,6 +3,7 @@
 
 #include "common/lidar_utils.h"
 #include "common/timer/timer.h"
+#include "common/point_cloud_utils.h"
 #include "loosely_lio.h"
 
 namespace sad {
@@ -104,7 +105,7 @@ void LooselyLIO::Undistort() {
     SE3 T_end = SE3(imu_state.R_, imu_state.p_);
 
     if (options_.save_motion_undistortion_pcd_) {
-        pcl::io::savePCDFileBinary("./data/ch7/before_undist.pcd", *cloud);
+        sad::SaveCloudToFile("./data/ch7/before_undist.pcd", *cloud);
     }
 
     /// 将所有点转到最后时刻状态上
@@ -127,7 +128,7 @@ void LooselyLIO::Undistort() {
     scan_undistort_ = cloud;
 
     if (options_.save_motion_undistortion_pcd_) {
-        pcl::io::savePCDFileBinary("./data/ch7/after_undist.pcd", *cloud);
+        sad::SaveCloudToFile("./data/ch7/after_undist.pcd", *cloud);
     }
 }
 

@@ -120,7 +120,7 @@ void LoopClosure::ComputeForCandidate(sad::LoopCandidate& c) {
             auto kf = iter->second;
             CloudPtr cloud(new PointCloudType);
             pcl::io::loadPCDFile("./data/ch9/" + std::to_string(id) + ".pcd", *cloud);
-            RemoveGround(cloud, 0.1);
+            sad::RemoveGround(cloud, 0.1);
 
             if (cloud->empty()) {
                 continue;

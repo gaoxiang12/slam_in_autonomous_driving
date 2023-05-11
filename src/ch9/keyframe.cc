@@ -6,12 +6,13 @@
 #include <glog/logging.h>
 #include <pcl/io/pcd_io.h>
 #include <iomanip>
+#include "common/point_cloud_utils.h"
 
 namespace sad {
 
 void Keyframe::SaveAndUnloadScan(const std::string &path) {
     if (cloud_) {
-        pcl::io::savePCDFileBinaryCompressed(path + "/" + std::to_string(id_) + ".pcd", *cloud_);
+        sad::SaveCloudToFile(path + "/" + std::to_string(id_) + ".pcd", *cloud_);
         cloud_ = nullptr;
     }
 }

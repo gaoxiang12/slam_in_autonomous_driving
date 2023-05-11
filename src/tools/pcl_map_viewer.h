@@ -13,6 +13,7 @@
 #include <pcl/visualization/pcl_visualizer.h>
 
 #include "common/point_types.h"
+#include "common/point_cloud_utils.h"
 
 namespace sad {
 
@@ -67,7 +68,7 @@ class PCLMapViewer {
     /// 存储地图至PCD文件
     void SaveMap(std::string path) {
         if (local_map_->size() > 0) {
-            pcl::io::savePCDFileBinaryCompressed(path, *local_map_);
+            sad::SaveCloudToFile(path, *local_map_);
             LOG(INFO) << "save map to " << path;
         } else {
             LOG(INFO) << "map 是空的" << path;
