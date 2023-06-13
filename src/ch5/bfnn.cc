@@ -38,7 +38,7 @@ std::vector<int> bfnn_point_k(CloudPtr cloud, const Vec3f& point, int k) {
 
 void bfnn_cloud_mt(CloudPtr cloud1, CloudPtr cloud2, std::vector<std::pair<size_t, size_t>>& matches) {
     // 先生成索引
-    std::vector<size_t> index(cloud1->size());
+    std::vector<size_t> index(cloud2->size());
     std::for_each(index.begin(), index.end(), [idx = 0](size_t& i) mutable { i = idx++; });
 
     // 并行化for_each
@@ -51,7 +51,7 @@ void bfnn_cloud_mt(CloudPtr cloud1, CloudPtr cloud2, std::vector<std::pair<size_
 
 void bfnn_cloud(CloudPtr cloud1, CloudPtr cloud2, std::vector<std::pair<size_t, size_t>>& matches) {
     // 单线程版本
-    std::vector<size_t> index(cloud1->size());
+    std::vector<size_t> index(cloud2->size());
     std::for_each(index.begin(), index.end(), [idx = 0](size_t& i) mutable { i = idx++; });
 
     matches.resize(index.size());
