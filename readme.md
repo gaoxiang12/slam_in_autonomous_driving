@@ -73,7 +73,8 @@
     ```bash
     sudo apt install -y ros-noetic-pcl-ros ros-noetic-velodyne-msgs libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev
     ```
-    - Pangolin: https://github.com/stevenlovegrove/Pangolin
+    - Pangolin: 编译安装thirdparty/pangolin.zip，或者 https://github.com/stevenlovegrove/Pangolin
+    - 编译thirdparty/g2o，或者自行编译安装 https://github.com/RainerKuemmerle/g2o 
     - 通过cmake, make安装本repo下的`thirdparty/g2o`库
 - 之后，使用通常的cmake, make方式就可以编译本书所有内容了。例如
 ```bash
@@ -115,10 +116,14 @@ cmake .. -DBUILD_WITH_UBUNTU1804=ON
 make -j8
 ```
 
+## 常见问题
+1. 图形界面在2023年以后特定型号的笔记本端导致桌面卡死（GL硬件兼容性）：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/67 
+2. 第5章test_nn编译时，gtest报gmock错误：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/18
+3. 编译器版本问题：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/4 
+
 ## TODO项
 
 - 一部分插图需要授权
-- 将UI里的不必要信息去除(右侧面板)
 - 整理数据集（增加几个seq）
 - 第9章前端第0个关键帧貌似有问题
 - LioPreiteg在某些数据集上不收敛
