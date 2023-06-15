@@ -203,7 +203,7 @@ void OctoTree::Knn(const Vec3f &pt, OctoTreeNode *node, std::priority_queue<Node
             idx_child = i;
             break;
         } else {
-            float d = node->box_.Dis(pt);
+            float d = node->children[i]->box_.Dis(pt);
             if (d < min_dis) {
                 idx_child = i;
                 min_dis = d;
