@@ -164,11 +164,11 @@ void KdTree::ComputeDisForLeaf(const Vec3f &pt, KdTreeNode *node,
     float dis2 = Dis2(pt, cloud_[node->point_idx_]);
     if (knn_result.size() < k_) {
         // results 不足k
-        knn_result.push({node, dis2});
+        knn_result.emplace(node, dis2);
     } else {
         // results等于k，比较current与max_dis_iter之间的差异
         if (dis2 < knn_result.top().distance2_) {
-            knn_result.push({node, dis2});
+            knn_result.emplace(node, dis2);
             knn_result.pop();
         }
     }

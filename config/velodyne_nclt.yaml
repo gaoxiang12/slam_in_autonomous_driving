@@ -10,6 +10,6 @@ mapping:
                  0, 0, 1 ]
 
 point_filter_num: 10
-max_iteration: 10
+max_iteration: 3
 imu_has_gravity: true
 with_ui: false
