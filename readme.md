@@ -117,6 +117,20 @@ cmake .. -DBUILD_WITH_UBUNTU1804=ON
 make -j8
 ```
 
+**使用docker**
+```bash
+docker build -t sad:v1 .
+./docker/docker_run.sh
+```
+进入docker容器后
+```bash
+cd ./thirdparty/g2o
+mkdir build
+cd build
+cmake ..
+make -j4
+```
+
 ## 常见问题
 1. 图形界面在2023年以后特定型号的笔记本端导致桌面卡死（GL硬件兼容性）：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/67 
 2. 第5章test_nn编译时，gtest报gmock错误：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/18
