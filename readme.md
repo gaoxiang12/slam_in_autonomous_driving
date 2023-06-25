@@ -128,7 +128,12 @@ cd ./thirdparty/g2o
 mkdir build
 cd build
 cmake ..
-make -j4
+make -j8
+cd /sad
+mkdir build
+cd build
+cmake ..
+make -j8
 ```
 
 ## 常见问题
