@@ -88,7 +88,7 @@ make -j8
 
 ### 适配Ubuntu18.04
 
-为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB
+为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB。或者在docker环境下使用。
 
 **安装gcc-9**
 ```bash
@@ -117,7 +117,7 @@ cmake .. -DBUILD_WITH_UBUNTU1804=ON
 make -j8
 ```
 
-**使用docker**
+**在docker环境下使用**
 ```bash
 docker build -t sad:v1 .
 ./docker/docker_run.sh
