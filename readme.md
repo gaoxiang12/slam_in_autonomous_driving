@@ -88,7 +88,7 @@ make -j8
 
 ### 适配Ubuntu18.04
 
-为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB
+为了在Ubuntu18.04上编译运行，需要安装gcc-9，并且使用对应版本的TBB。或者在docker环境下使用。
 
 **安装gcc-9**
 ```bash
@@ -114,6 +114,25 @@ g++ -v
 mkdir build
 cd build
 cmake .. -DBUILD_WITH_UBUNTU1804=ON
+make -j8
+```
+
+**在docker环境下使用**
+```bash
+docker build -t sad:v1 .
+./docker/docker_run.sh
+```
+进入docker容器后
+```bash
+cd ./thirdparty/g2o
+mkdir build
+cd build
+cmake ..
+make -j8
+cd /sad
+mkdir build
+cd build
+cmake ..
 make -j8
 ```
 
