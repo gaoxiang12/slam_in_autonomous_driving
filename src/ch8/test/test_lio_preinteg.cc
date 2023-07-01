@@ -10,9 +10,9 @@
 #include "common/sys_utils.h"
 #include "common/timer/timer.h"
 
-DEFINE_string(bag_path, "./dataset/sad/ulhk/test3.bag", "path to rosbag");
-DEFINE_string(dataset_type, "ULHK", "NCLT/ULHK/UTBM/AVIA");                   // 数据集类型
-DEFINE_string(config, "./config/velodyne_ulhk.yaml", "path of config yaml");  // 配置文件类型
+DEFINE_string(bag_path, "./dataset/sad/nclt/20120115.bag", "path to rosbag");
+DEFINE_string(dataset_type, "NCLT", "NCLT/ULHK/UTBM/AVIA");                   // 数据集类型
+DEFINE_string(config, "./config/velodyne_nclt.yaml", "path of config yaml");  // 配置文件类型
 DEFINE_bool(display_map, true, "display map?");
 
 int main(int argc, char** argv) {

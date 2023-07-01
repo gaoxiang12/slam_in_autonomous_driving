@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     opti.Run();
 
     sad::LoopClosure lc(FLAGS_config_yaml);
-    if (lc.Init() == false) {
+    if (!lc.Init()) {
         LOG(ERROR) << "failed to init loop closure.";
         return -1;
     }
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 
     sad::Optimization opti2(FLAGS_config_yaml);
     if (!opti2.Init(2)) {
-        LOG(ERROR) << "failed to init opti1.";
+        LOG(ERROR) << "failed to init opti2.";
         return -1;
     }
     opti2.Run();
