@@ -13,8 +13,8 @@
 #include "common/g2o_types.h"
 
 #include "common/lidar_utils.h"
-#include "common/timer/timer.h"
 #include "common/point_cloud_utils.h"
+#include "common/timer/timer.h"
 
 #include "lio_iekf.h"
 
@@ -96,13 +96,11 @@ void LioIEKF::Align() {
         ndt_.AddCloud(current_scan_);
         flg_first_scan_ = false;
 
-        // nav_state_prior_ = std::make_shared<PriorNavState>(last_nav_state_, Mat15d::Identity() * 1e4);
         return;
     }
 
     // 后续的scan，使用NDT配合pose进行更新
     LOG(INFO) << "=== frame " << frame_num_;
-    // pred_nav_state_ = ieskf_.GetNominalState();
 
     ndt_.SetSource(current_scan_filter);
     ieskf_.UpdateUsingCustomObserve([this](const SE3 &input_pose, Mat18d &HTVH, Vec18d &HTVr) {
@@ -110,9 +108,6 @@ void LioIEKF::Align() {
     });
 
     auto current_nav_state = ieskf_.GetNominalState();
-    // Optimize();
-    // nominal state反馈给ieksf
-    // ieskf_.SetX(current_nav_state);
 
     // 若运动了一定范围，则把点云放入地图中
     SE3 current_pose = ieskf_.GetNominalSE3();
