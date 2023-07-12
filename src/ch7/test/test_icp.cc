@@ -12,8 +12,8 @@
 
 #include "ch7/icp_3d.h"
 #include "ch7/ndt_3d.h"
-#include "common/sys_utils.h"
 #include "common/point_cloud_utils.h"
+#include "common/sys_utils.h"
 
 DEFINE_string(source, "./data/ch7/EPFL/kneeling_lady_source.pcd", "第1个点云路径");
 DEFINE_string(target, "./data/ch7/EPFL/kneeling_lady_target.pcd", "第2个点云路径");
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
             success = icp.AlignP2Line(pose);
             if (success) {
                 LOG(INFO) << "icp p2line align success, pose: " << pose.so3().unit_quaternion().coeffs().transpose()
-                           << ", " << pose.translation().transpose();
+                          << ", " << pose.translation().transpose();
                 sad::CloudPtr source_trans(new sad::PointCloudType);
                 pcl::transformPointCloud(*source, *source_trans, pose.matrix().cast<float>());
                 sad::SaveCloudToFile("./data/ch7/icp_line_trans.pcd", *source_trans);
@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
             success = ndt.AlignNdt(pose);
             if (success) {
                 LOG(INFO) << "ndt align success, pose: " << pose.so3().unit_quaternion().coeffs().transpose() << ", "
-                           << pose.translation().transpose();
+                          << pose.translation().transpose();
                 sad::CloudPtr source_trans(new sad::PointCloudType);
                 pcl::transformPointCloud(*source, *source_trans, pose.matrix().cast<float>());
                 sad::SaveCloudToFile("./data/ch7/ndt_trans.pcd", *source_trans);
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
             sad::SaveCloudToFile("./data/ch7/pcl_icp_trans.pcd", *output_pcl);
 
             // 计算GT pose差异
-            double pose_error = (gt_pose.inverse() * T.inverse().cast<double>()).log().norm();
+            double pose_error = (gt_pose.inverse() * T.cast<double>()).log().norm();
             LOG(INFO) << "ICP PCL pose error: " << pose_error;
         },
         "ICP PCL", 1);
@@ -165,7 +165,7 @@ int main(int argc, char** argv) {
             LOG(INFO) << "score: " << ndt_pcl.getTransformationProbability();
 
             // 计算GT pose差异
-            double pose_error = (gt_pose.inverse() * T.inverse().cast<double>()).log().norm();
+            double pose_error = (gt_pose.inverse() * T.cast<double>()).log().norm();
             LOG(INFO) << "NDT PCL pose error: " << pose_error;
         },
         "NDT PCL", 1);

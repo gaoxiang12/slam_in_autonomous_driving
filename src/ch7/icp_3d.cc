@@ -234,8 +234,10 @@ bool Icp3d::AlignP2Line(SE3& init_pose) {
     // 点线与点面基本是完全一样的
 
     SE3 pose = init_pose;
-    pose.translation() = target_center_ - source_center_;  // 设置平移初始值
-    LOG(INFO) << "init trans set to " << pose.translation().transpose();
+    if (options_.use_initial_translation_) {
+        pose.translation() = target_center_ - source_center_;  // 设置平移初始值
+        LOG(INFO) << "init trans set to " << pose.translation().transpose();
+    }
 
     std::vector<int> index(source_->points.size());
     for (int i = 0; i < index.size(); ++i) {
