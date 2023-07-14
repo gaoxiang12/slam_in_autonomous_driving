@@ -2,7 +2,8 @@
 
 本书向读者系统介绍了惯性导航、组合导航、激光建图、激光定位、激光惯导里程计等知识。本仓库是书籍对应的源代码仓库，可以公开使用。
 
-![WechatIMG2035](https://github.com/gaoxiang12/slam_in_autonomous_driving/assets/6635511/734af25b-d866-4dcf-a155-773190ba03d8)
+<img src="https://github.com/gaoxiang12/slam_in_autonomous_driving/assets/6635511/734af25b-d866-4dcf-a155-773190ba03d8" width="300" />
+
 
 
 ## 注意
