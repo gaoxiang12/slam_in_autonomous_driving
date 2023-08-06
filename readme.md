@@ -4,10 +4,8 @@
 
 <img src="https://github.com/gaoxiang12/slam_in_autonomous_driving/assets/6635511/734af25b-d866-4dcf-a155-773190ba03d8" width="300" />
 
-
-
 ## 注意
-
+使用 Qt-creator 作为IDE时，需要打开终端 mkdir build && cd build && cmake ..  后再用 Qt-creator 打开 CMakeLists.txt 文件
 - 本书已于2023.7.10开始印刷，预计在两周内上架。届时我会更新各平台的链接信息。
 - 2023.8.9 本书目前是第二次印刷，在第一次上修正了一部分内容（但没有签名了），详情见代码的推送。
 - 电子工业出版社官方：https://item.jd.com/10080292102089.html
