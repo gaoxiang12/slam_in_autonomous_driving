@@ -141,7 +141,8 @@ make -j8
 ## 常见问题
 1. 图形界面在2023年以后特定型号的笔记本端导致桌面卡死（GL硬件兼容性）：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/67 
 2. 第5章test_nn编译时，gtest报gmock错误：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/18
-3. 编译器版本问题：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/4 
+3. 编译器版本问题：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/4
+4. g2o编译问题（config.h找不到）： https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/95 
 
 ## TODO项
 
