@@ -9,6 +9,7 @@
 ## 注意
 
 - 本书已于2023.7.10开始印刷，预计在两周内上架。届时我会更新各平台的链接信息。
+- 2023.8.9 本书目前是第二次印刷，在第一次上修正了一部分内容（但没有签名了），详情见代码的推送。
 - 电子工业出版社官方：https://item.jd.com/10080292102089.html
 - 京东自营： https://item.jd.com/13797963.html
 
@@ -140,7 +141,8 @@ make -j8
 ## 常见问题
 1. 图形界面在2023年以后特定型号的笔记本端导致桌面卡死（GL硬件兼容性）：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/67 
 2. 第5章test_nn编译时，gtest报gmock错误：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/18
-3. 编译器版本问题：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/4 
+3. 编译器版本问题：https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/4
+4. g2o编译问题（config.h找不到）： https://github.com/gaoxiang12/slam_in_autonomous_driving/issues/95 
 
 ## TODO项
 
