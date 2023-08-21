@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 
           /// predict就会更新ESKF，所以此时就可以发送数据
           auto state = eskf.GetNominalState();
-          if(ui){
+          if (ui) {
               ui->UpdateNavState(state);
           }
 
