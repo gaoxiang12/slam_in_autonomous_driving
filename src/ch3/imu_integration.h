@@ -24,7 +24,7 @@ class IMUIntegration {
   void AddIMU(const IMU& imu) {
     double dt = imu.timestamp_ - timestamp_;
     if (dt > 0 && dt < 0.1) {
-      // 假设IMU时间间隔在0至0.1以内
+      // 假设 IMU 时间间隔在 0 至 0.1 以内, 不考虑测量噪声，只考虑零偏
       p_ = p_ + v_ * dt + 0.5 * gravity_ * dt * dt +
            0.5 * (R_ * (imu.acce_ - ba_)) * dt * dt;          // P57-(3.16b)
       v_ = v_ + R_ * (imu.acce_ - ba_) * dt + gravity_ * dt;  // P57-(3.16c)
@@ -46,7 +46,7 @@ class IMUIntegration {
 
  private:
   // 累计量
-  SO3 R_;
+  SO3 R_;  // R_b2w
   Vec3d v_ = Vec3d::Zero();
   Vec3d p_ = Vec3d::Zero();
 
