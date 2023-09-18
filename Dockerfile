@@ -3,7 +3,7 @@ FROM osrf/ros:noetic-desktop-full
 ADD docker/sources.list /etc/apt
 
 RUN apt-get update \
-&& apt-get install -y ros-noetic-pcl-ros ros-noetic-velodyne-msgs libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev unzip \
+&& apt-get install -y ros-noetic-pcl-ros ros-noetic-velodyne-msgs libopencv-dev libgoogle-glog-dev libeigen3-dev libsuitesparse-dev libpcl-dev libyaml-cpp-dev libbtbb-dev libgmock-dev unzip python3-tk\
 && mkdir /sad
 
 COPY ./thirdparty/ /sad/
