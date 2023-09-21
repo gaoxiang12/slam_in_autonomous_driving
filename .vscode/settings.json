@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "core": "cpp",
+        "numericaldiff": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "*.ipp": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "regex": "cpp",
+        "utility": "cpp",
+        "valarray": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
+    }
+}

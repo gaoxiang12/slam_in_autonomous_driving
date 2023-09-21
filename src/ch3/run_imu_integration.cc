@@ -10,7 +10,7 @@
 #include "tools/ui/pangolin_window.h"
 
 DEFINE_string(imu_txt_path, "./data/ch3/10.txt", "数据文件路径");
-DEFINE_bool(with_ui, true, "是否显示图形界面");
+DEFINE_bool(with_ui, false, "是否显示图形界面");
 
 /// 本程序演示如何对IMU进行直接积分
 /// 该程序需要输入data/ch3/下的文本文件，同时它将状态输出到data/ch3/state.txt中，在UI中也可以观察到车辆运动

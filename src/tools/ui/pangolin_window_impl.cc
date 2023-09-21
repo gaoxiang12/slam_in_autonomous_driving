@@ -300,8 +300,7 @@ void PangolinWindowImpl::Render() {
 
 void PangolinWindowImpl::AllocateBuffer() {
     std::string global_text(
-        "Welcome to SAD.UI. Open source code: https://github.com/gaoxiang12/slam_in_autonomous_driving. All right "
-        "reserved.");
+        "localziation U");
     auto &font = pangolin::default_font();
     gltext_label_global_ = font.Text(global_text);
 }
