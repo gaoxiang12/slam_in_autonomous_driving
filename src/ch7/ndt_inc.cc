@@ -3,6 +3,7 @@
 //
 
 #include "ch7/ndt_inc.h"
+#include "common/lidar_utils.h"
 #include "common/math_utils.h"
 #include "common/timer/timer.h"
 
@@ -16,7 +17,7 @@ void IncNdt3d::AddCloud(CloudPtr cloud_world) {
     std::set<KeyType, less_vec<3>> active_voxels;  // 记录哪些voxel被更新
     for (const auto& p : cloud_world->points) {
         auto pt = ToVec3d(p);
-        auto key = (pt * options_.inv_voxel_size_).cast<int>();
+        auto key = CastToInt(Vec3d(pt * options_.inv_voxel_size_));
         auto iter = grids_.find(key);
         if (iter == grids_.end()) {
             // 栅格不存在
@@ -139,7 +140,7 @@ bool IncNdt3d::AlignNdt(SE3& init_pose) {
             Vec3d qs = pose * q;  // 转换之后的q
 
             // 计算qs所在的栅格以及它的最近邻栅格
-            Vec3i key = (qs * options_.inv_voxel_size_).cast<int>();
+            Vec3i key = CastToInt(Vec3d(qs * options_.inv_voxel_size_));
 
             for (int i = 0; i < nearby_grids_.size(); ++i) {
                 Vec3i real_key = key + nearby_grids_[i];
@@ -246,7 +247,7 @@ void IncNdt3d::ComputeResidualAndJacobians(const SE3& input_pose, Mat18d& HTVH, 
         Vec3d qs = pose * q;  // 转换之后的q
 
         // 计算qs所在的栅格以及它的最近邻栅格
-        Vec3i key = (qs * options_.inv_voxel_size_).cast<int>();
+        Vec3i key = CastToInt(Vec3d(qs * options_.inv_voxel_size_));
 
         for (int i = 0; i < nearby_grids_.size(); ++i) {
             Vec3i real_key = key + nearby_grids_[i];
@@ -312,7 +313,7 @@ void IncNdt3d::BuildNDTEdges(sad::VertexPose* v, std::vector<EdgeNDT*>& edges) {
     for (const auto& pt : source_->points) {
         Vec3d q = ToVec3d(pt);
         auto edge = new EdgeNDT(v, q, [this](const Vec3d& qs, Vec3d& mu, Mat3d& info) -> bool {
-            Vec3i key = (qs * options_.inv_voxel_size_).cast<int>();
+            Vec3i key = CastToInt(Vec3d(qs * options_.inv_voxel_size_));
 
             auto it = grids_.find(key);
             /// 这里要检查高斯分布是否已经估计

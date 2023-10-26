@@ -3,6 +3,7 @@
 //
 
 #include "ndt_3d.h"
+#include "common/lidar_utils.h"
 #include "common/math_utils.h"
 
 #include <glog/logging.h>
@@ -21,8 +22,8 @@ void Ndt3d::BuildVoxels() {
     std::for_each(index.begin(), index.end(), [idx = 0](size_t& i) mutable { i = idx++; });
 
     std::for_each(index.begin(), index.end(), [this](const size_t& idx) {
-        auto pt = ToVec3d(target_->points[idx]);
-        auto key = (pt * options_.inv_voxel_size_).cast<int>();
+        Vec3d pt = ToVec3d(target_->points[idx]) * options_.inv_voxel_size_;
+        auto key = CastToInt(pt);
         if (grids_.find(key) == grids_.end()) {
             grids_.insert({key, {idx}});
         } else {
@@ -102,7 +103,7 @@ bool Ndt3d::AlignNdt(SE3& init_pose) {
             Vec3d qs = pose * q;  // 转换之后的q
 
             // 计算qs所在的栅格以及它的最近邻栅格
-            Vec3i key = (qs * options_.inv_voxel_size_).cast<int>();
+            Vec3i key = CastToInt(Vec3d(qs * options_.inv_voxel_size_));
 
             for (int i = 0; i < nearby_grids_.size(); ++i) {
                 auto key_off = key + nearby_grids_[i];

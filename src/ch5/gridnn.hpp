@@ -106,7 +106,12 @@ bool GridNN<dim>::SetPointCloud(CloudPtr cloud) {
 
 template <int dim>
 Eigen::Matrix<int, dim, 1> GridNN<dim>::Pos2Grid(const Eigen::Matrix<float, dim, 1>& pt) {
-    return (pt * inv_resolution_).template cast<int>();
+    return pt.array().template round().template cast<int>();
+    // Eigen::Matrix<int, dim, 1> ret;
+    // for (int i = 0; i < dim; ++i) {
+    //     ret(i, 0) = round(pt[i] * inv_resolution_);
+    // }
+    // return ret;
 }
 
 template <>
