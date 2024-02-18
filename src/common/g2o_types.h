@@ -34,6 +34,7 @@ class VertexPose : public g2o::BaseVertex<6, SE3> {
             is >> data[i];
         }
         setEstimate(SE3(Quatd(data[6], data[3], data[4], data[5]), Vec3d(data[0], data[1], data[2])));
+        return true;
     }
 
     bool write(std::ostream& os) const override {
