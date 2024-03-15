@@ -106,8 +106,8 @@ void OctoTree::ExpandNode(OctoTreeNode *node, const IndexVec &parent_idx, std::v
 }
 
 Box3D OctoTree::ComputeBoundingBox() {
-    float min_values[3] = {std::numeric_limits<float>::max()};
-    float max_values[3] = {-std::numeric_limits<float>::max()};
+    float min_values[3] = {std::numeric_limits<float>::max(),std::numeric_limits<float>::max(),std::numeric_limits<float>::max()};
+    float max_values[3] = {-std::numeric_limits<float>::max(),-std::numeric_limits<float>::max(),-std::numeric_limits<float>::max()};
 
     for (const auto &p : cloud_) {
         for (int i = 0; i < 3; ++i) {
