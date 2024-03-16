@@ -35,6 +35,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 # g2o 使用thirdparty中的
 include_directories(${PROJECT_SOURCE_DIR}/thirdparty/g2o/)
+include_directories(${PROJECT_SOURCE_DIR}/thirdparty/g2o/build/)
 set(g2o_libs
         ${PROJECT_SOURCE_DIR}/thirdparty/g2o/lib/libg2o_stuff.so
         ${PROJECT_SOURCE_DIR}/thirdparty/g2o/lib/libg2o_core.so
