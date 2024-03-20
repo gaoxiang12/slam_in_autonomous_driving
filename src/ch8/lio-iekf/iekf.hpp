@@ -230,7 +230,9 @@ bool IESKF<S>::UpdateUsingCustomObserve(IESKF::CustomObsFunc obs) {
 
         // 投影P
         Mat18T J = Mat18T::Identity();
-        J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat((R_.inverse() * start_R).log());
+        // J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat((R_.inverse() * start_R).log());
+        J.template block<3, 3>(6, 6) = Mat3T::Identity() - 0.5 * SO3::hat((start_R.inverse() * R_).log());
+
         Pk = J * cov_ * J.transpose();
 
         // 卡尔曼更新
