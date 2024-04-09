@@ -60,7 +60,7 @@ class Ndt3d {
         BuildVoxels();
 
         // 计算点云中心
-        target_center_ = std::accumulate(target->points.begin(), target_->points.end(), Vec3d::Zero().eval(),
+        target_center_ = std::accumulate(target_->points.begin(), target_->points.end(), Vec3d::Zero().eval(),
                                          [](const Vec3d& c, const PointType& pt) -> Vec3d { return c + ToVec3d(pt); }) /
                          target_->size();
     }
