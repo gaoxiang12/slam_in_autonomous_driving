@@ -5,6 +5,7 @@
 #ifndef SLAM_IN_AUTO_DRIVING_POINT_TYPES_H
 #define SLAM_IN_AUTO_DRIVING_POINT_TYPES_H
 
+#define PCL_NO_PRECOMPILE
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/impl/pcl_base.hpp>
