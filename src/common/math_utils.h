@@ -64,7 +64,8 @@ void ComputeMeanAndCov(const C& data, Eigen::Matrix<double, dim, 1>& mean, Eigen
                            [&getter](const D& sum, const auto& data) -> D { return sum + getter(data); }) / len;
     cov = std::accumulate(data.begin(), data.end(), E::Zero().eval(),
                           [&mean, &getter](const E& sum, const auto& data) -> E {
-                              D v = getter(data) - mean;
+                              auto value = getter(item).eval();
+                              D v = value - mean;
                               return sum + v * v.transpose();
                           }) / (len - 1);
     // clang-format on
