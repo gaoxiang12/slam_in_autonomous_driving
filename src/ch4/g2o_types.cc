@@ -71,7 +71,7 @@ void EdgeInertial::linearizeOplus() {
     const SO3 dR = preint_->GetDeltaRotation(bg);
     const SO3 eR = SO3(dR).inverse() * R1T * R2;
     const Vec3d er = eR.log();
-    const Mat3d invJr = SO3::jr_inv(eR);
+    const Mat3d invJr = SO3::jr_inv(er);
 
     /// 雅可比矩阵
     /// 注意有3个index, 顶点的，自己误差的，顶点内部变量的
