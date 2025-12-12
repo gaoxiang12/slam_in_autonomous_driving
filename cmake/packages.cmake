@@ -106,6 +106,8 @@ if(BUILD_WITH_UBUNTU1804)
     include_directories(${PROJECT_SOURCE_DIR}/thirdparty/tbb/oneTBB-2019_U8/oneTBB-2019_U8/include)
     link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/tbb_release)
 
+    find_package(GTest CONFIG REQUIRED)
+
     set(third_party_libs
             ${catkin_LIBRARIES}
             ${g2o_libs}
@@ -129,4 +131,4 @@ else()
             yaml-cpp
             tbb
             )
-endif ()
+endif()
